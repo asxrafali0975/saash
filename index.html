@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Love You Princess Sanjana</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <style>
+        /* Reset some default styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: radial-gradient(circle, rgba(255, 121, 121, 0.8) 0%, rgba(255, 209, 122, 0.8) 100%);
+            animation: glowingBackground 8s ease-in-out infinite;
+        }
+
+        .container {
+            text-align: center;
+            opacity: 0;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 6rem;
+            color: #fff;
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.8), 0 0 50px rgba(255, 255, 255, 0.6);
+            animation: glitter 2s infinite ease-in-out;
+        }
+
+        .heart {
+            font-size: 6rem;
+            color: red;
+            animation: heartPulse 1.5s infinite ease-in-out, glow 1.5s ease-in-out infinite;
+            margin-top: 20px;
+        }
+
+        .message {
+            font-size: 2.5rem;
+            color: white;
+            margin-top: 30px;
+            opacity: 0;
+            letter-spacing: 1.5px;
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        .response {
+            font-size: 2rem;
+            color: white;
+            margin-top: 30px;
+            opacity: 0;
+            letter-spacing: 1.5px;
+            display: none;
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        /* Button Styling */
+        .btn-love {
+            background-color: #ff3366;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 2rem;
+            cursor: pointer;
+            border-radius: 50px;
+            margin-top: 50px;
+            box-shadow: 0 10px 20px rgba(255, 51, 102, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-love:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 51, 102, 0.5);
+        }
+
+        .btn-love:active {
+            transform: translateY(2px);
+        }
+
+        /* Glow and Background Animation */
+        @keyframes glowingBackground {
+            0% { background: radial-gradient(circle, rgba(255, 121, 121, 0.8) 0%, rgba(255, 209, 122, 0.8) 100%); }
+            50% { background: radial-gradient(circle, rgba(255, 111, 111, 0.8) 0%, rgba(255, 182, 131, 0.8) 100%); }
+            100% { background: radial-gradient(circle, rgba(255, 181, 181, 0.8) 0%, rgba(255, 151, 121, 0.8) 100%); }
+        }
+
+        /* Glitter Effect */
+        @keyframes glitter {
+            0% { text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6); }
+            50% { text-shadow: 0 0 25px rgba(255, 255, 255, 0.8), 0 0 50px rgba(255, 255, 255, 0.8); }
+            100% { text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6); }
+        }
+
+        /* Heart Pulse Animation */
+        @keyframes heartPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Heart Glow Animation */
+        @keyframes glow {
+            0% { text-shadow: 0 0 20px red, 0 0 30px red, 0 0 40px red; }
+            100% { text-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red; }
+        }
+
+        /* Fade-In Message */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 4.5rem;
+            }
+            .message {
+                font-size: 2rem;
+            }
+            .heart {
+                font-size: 5rem;
+            }
+            .btn-love {
+                font-size: 1.5rem;
+                padding: 12px 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            .message {
+                font-size: 1.5rem;
+            }
+            .heart {
+                font-size: 4rem;
+            }
+            .btn-love {
+                font-size: 1.2rem;
+                padding: 10px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>I Love You</h1>
+        <div class="heart">❤️</div>
+        <p class="message">moti</p>
+
+        <!-- Button -->
+        <button class="btn-love" id="loveButton">Do you love me? click karo</button>
+
+        <!-- New response message -->
+        <p class="response" id="responseMessage">I love you too, Moti Princess 🤭</p>
+    </div>
+
+    <script>
+        // GSAP Animations on page load
+        window.onload = function () {
+            const container = document.querySelector('.container');
+            const heart = document.querySelector('.heart');
+            const message = document.querySelector('.message');
+            const h1 = document.querySelector('h1');
+
+            // Fade-in the entire container
+            gsap.to(container, { opacity: 1, duration: 2 });
+
+            // Animate "I Love You" with a bounce and glitter effect
+            gsap.from(h1, {
+                y: -100,
+                opacity: 0,
+                duration: 1.5,
+                ease: "bounce.out",
+                delay: 0.5
+            });
+
+            // Heart pulse with glow effect
+            gsap.to(heart, {
+                scale: 1.2,
+                repeat: -1,
+                yoyo: true,
+                duration: 1.5,
+                ease: "power1.inOut",
+                delay: 1
+            });
+
+            // Message fade-in with a slight bounce
+            gsap.to(message, {
+                opacity: 1,
+                y: 20,
+                duration: 1.5,
+                delay: 2,
+                ease: "power3.out"
+            });
+        };
+
+        // Handle button click to display the response message
+        document.getElementById('loveButton').addEventListener('click', function() {
+            const responseMessage = document.getElementById('responseMessage');
+            // Display the response with GSAP animation
+            gsap.fromTo(responseMessage, { opacity: 0, y: 30 }, {
+                opacity: 1, y: 0, duration: 2, ease: "power3.out", delay: 0.5
+            });
+            responseMessage.style.display = 'block';  // Make the response visible
+        });
+    </script>
+
+</body>
+</html>
