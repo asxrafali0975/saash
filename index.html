@@ -175,8 +175,20 @@
         <button class="btn-love" id="loveButton">Do you love me? click karo</button>
     </div>
 
+    <audio id="myAudio"  autoplay loop>
+        
+        <source src="song.mpeg" type="audio/mpeg">
+        
+      </audio>
+
     <script>
+      
         window.onload = function () {
+            
+            const audio = document.getElementById('myAudio');
+            audio.play();
+
+          
             const container = document.querySelector('.container');
             const heart = document.querySelector('.heart');
             const message = document.querySelector('.message');
@@ -217,6 +229,7 @@
             });
         };
 
+       
         document.getElementById('loveButton').addEventListener('click', function() {
             const responseMessage = document.getElementById('responseMessage');
             const loveButton = document.getElementById('loveButton');
